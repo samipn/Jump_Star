@@ -224,16 +224,18 @@ class GameOver extends Phaser.Scene {
     this.cameras.main.setBackgroundColor('#483D8B');
 		const width = this.scale.width
 		const height = this.scale.height
+		const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
+    const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
 		this.add.text(width * 0.5, height * 0.5, 'Game Over', {
 			fontSize: 50
 		})
 		.setOrigin(0.5)
-        this.add.text(50,50, "Click anywhere to restart.").setFontSize(20);
-        this.input.on('pointerdown', () => {
-            this.cameras.main.fade(1000, 0,0,0);
-            this.time.delayedCall(1000, () => this.scene.start('game'));
-        });
+    this.add.text(screenCenterX, screenCenterY + 50, "Click anywhere to restart").setFontSize(20).setOrigin(0.5);
+    this.input.on('pointerdown', () => {
+        this.cameras.main.fade(1000, 0,0,0);
+        this.time.delayedCall(1000, () => this.scene.start('game'));
+    });
 	}
 }
 
@@ -247,11 +249,15 @@ class Intro extends Phaser.Scene {
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
         const TitleText = this.add.text(screenCenterX, screenCenterY, 'Jump Star').setOrigin(0.5).setFontSize(50);
-        this.add.text(50,50, "Click anywhere to begin.").setFontSize(20);
+        this.add.text(screenCenterX,screenCenterY + 100, "Click anywhere to begin.").setFontSize(20).setOrigin(0.5);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
             this.time.delayedCall(1000, () => this.scene.start('game'));
         });
+				this.add.text(screenCenterX, screenCenterY + 50, 'Use arrow keys to move left and right, your player automatically jumps', {
+					fontSize: 20
+				})
+				.setOrigin(0.5)
     }
 }
 
