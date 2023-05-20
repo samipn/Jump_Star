@@ -72,13 +72,15 @@ class Game extends Phaser.Scene {
 		this.physics.add.collider(this.platforms, this.stars)
 		this.physics.add.overlap(this.player, this.stars, this.handleCollectStar, undefined, this)
 
-		this.starsCollectedText = this.add.text(150, 50, 'Stars: 0', { color: '#FFFFFF', fontSize: 50 })
+		this.starsCollectedText = this.add.text(100, 50, 'Stars: 0', { color: '#FFFFFF', font: 'Comic Sans'})
 			.setScrollFactor(0)
 			.setOrigin(0.5)
+			.setFontSize(50)
 
-		highScoreText = this.add.text(1700, 50, 'Highscore: ' + highscore, {color: '#FFFFFF', fontSize: 50})
+		highScoreText = this.add.text(1750, 50, 'Highscore: ' + highscore, {color: '#FFFFFF', font: 'Comic Sans'})
 			.setScrollFactor(0)
 			.setOrigin(0.5)
+			.setFontSize(50)
 	}
 
 	update(t, dt)
@@ -94,7 +96,7 @@ class Game extends Phaser.Scene {
             const scrollX = this.cameras.main.scrollX
 			if (platform.y >= scrollY + 800)
 			{
-                platform.x = scrollX - Phaser.Math.Between(-900, -1700)
+        platform.x = scrollX - Phaser.Math.Between(-900, -1700)
 				platform.y = scrollY - Phaser.Math.Between(50, 100)
 				platform.body.updateFromGameObject()
 				this.addStarAbove(platform)
@@ -221,16 +223,17 @@ class GameOver extends Phaser.Scene {
 	create()
 	{
     this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
-    this.cameras.main.setBackgroundColor('#483D8B');
+    this.cameras.main.setBackgroundColor('#B90E0A');
 		const width = this.scale.width
 		const height = this.scale.height
 		const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
     const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
-		this.add.text(width * 0.5, height * 0.5, 'Game Over', {
-			fontSize: 50
+		this.add.text(screenCenterX, screenCenterY, 'Game Over', {
+			font: 'Comic Sans'
 		})
 		.setOrigin(0.5)
+		.setFontSize(50)
     this.add.text(screenCenterX, screenCenterY + 50, "Click anywhere to restart").setFontSize(20).setOrigin(0.5);
     this.input.on('pointerdown', () => {
         this.cameras.main.fade(1000, 0,0,0);
@@ -248,13 +251,17 @@ class Intro extends Phaser.Scene {
         this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
-        const TitleText = this.add.text(screenCenterX, screenCenterY, 'Jump Star').setOrigin(0.5).setFontSize(50);
-        this.add.text(screenCenterX,screenCenterY + 100, "Click anywhere to begin.").setFontSize(20).setOrigin(0.5);
+        const TitleText = this.add.text(screenCenterX, screenCenterY, 'Jump Star', {
+					font: 'Comic Sans'
+				})
+				.setOrigin(0.5)
+				.setFontSize(50);
+        this.add.text(screenCenterX,screenCenterY + 110, "Click anywhere to begin.").setFontSize(20).setOrigin(0.5);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
             this.time.delayedCall(1000, () => this.scene.start('game'));
         });
-				this.add.text(screenCenterX, screenCenterY + 50, 'Use arrow keys to move left and right, your player automatically jumps', {
+				this.add.text(screenCenterX, screenCenterY + 60, 'Use arrow keys to move left and right, your player automatically jumps', {
 					fontSize: 20
 				})
 				.setOrigin(0.5)
