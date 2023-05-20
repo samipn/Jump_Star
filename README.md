@@ -4,7 +4,10 @@ This is a jump physics game made by Samip Niraula using the Phaser framework.
 
 The player uses the arrow keys to move as continuous inputs, and they automatically jump. This is an endless game, so the player is trying to get as many stars as possible. 
 
-I added transition effects between screens, as well as a jumping animation and I also added a counter to count how many stars the player has collected. 
+I added transition effects between screens, as well as a jumping animation.
+
+I also added a counter to count how many stars the player has collected, and a high score tracker
+that updates in real time and saves the player's highscore even after closing the game. 
 
 I created all assets by myself. For the player, I decided to have a space/star theme so the player themselves is a star. 
 
