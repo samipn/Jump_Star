@@ -25,6 +25,7 @@ class Game extends Phaser.Scene {
 		this.load.image('platform', 'asteroid.png')
 		this.load.image('star_head', 'star_head.png')
 		this.load.image('star', 'star.png')
+        this.load.image('jumping', 'jumping.png')
 
 		this.cursors = this.input.keyboard.createCursorKeys()
 	}
@@ -95,6 +96,7 @@ class Game extends Phaser.Scene {
 		if (touchingDown)
 		{
 			this.player.setVelocityY(-350)
+            this.player.setTexture('jumping')
 		}
 
 		const vy = this.player.body.velocity.y
