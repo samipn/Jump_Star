@@ -1,3 +1,7 @@
+let highscore = 0
+
+let highScoreText
+
 class Game extends Phaser.Scene {
 	platforms
 
@@ -20,14 +24,14 @@ class Game extends Phaser.Scene {
 	}
 
 	preload() {
-        this.load.path = "./assets/";		
-        this.load.image('background', 'background.png')
-		this.load.image('platform', 'asteroid.png')
-		this.load.image('star_head', 'star_head.png')
-		this.load.image('star', 'star.png')
-        this.load.image('jumping', 'jumping.png')
+      this.load.path = "./assets/";		
+      this.load.image('background', 'background.png')
+			this.load.image('platform', 'asteroid.png')
+			this.load.image('star_head', 'star_head.png')
+			this.load.image('star', 'star.png')
+      this.load.image('jumping', 'jumping.png')
 
-		this.cursors = this.input.keyboard.createCursorKeys()
+			this.cursors = this.input.keyboard.createCursorKeys()
 	}
 
 	create()
@@ -69,6 +73,10 @@ class Game extends Phaser.Scene {
 		this.physics.add.overlap(this.player, this.stars, this.handleCollectStar, undefined, this)
 
 		this.starsCollectedText = this.add.text(150, 50, 'Stars: 0', { color: '#FFFFFF', fontSize: 50 })
+			.setScrollFactor(0)
+			.setOrigin(0.5)
+
+		highScoreText = this.add.text(1700, 50, 'Highscore: ' + highscore, {color: '#FFFFFF', fontSize: 50})
 			.setScrollFactor(0)
 			.setOrigin(0.5)
 	}
@@ -127,6 +135,14 @@ class Game extends Phaser.Scene {
 		{
 			this.scene.start('game-over')
 		}
+
+		highScoreText.text = 'Highscore: ' + localStorage.getItem("highscore");
+  		{
+     		if (this.starsCollected > localStorage.getItem("highscore")) 
+        { 
+            localStorage.setItem("highscore", this.starsCollected);
+        }
+    	}
 	}
 
 	horizontalWrap(sprite)
@@ -164,7 +180,6 @@ class Game extends Phaser.Scene {
 		this.starsCollected++
 
 		this.starsCollectedText.text = `Stars: ${this.starsCollected}`
-
 	}
 
 	findBottomMostPlatform()
@@ -205,8 +220,8 @@ class GameOver extends Phaser.Scene {
 
 	create()
 	{
-        this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
-        this.cameras.main.setBackgroundColor('#483D8B');
+    this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
+    this.cameras.main.setBackgroundColor('#483D8B');
 		const width = this.scale.width
 		const height = this.scale.height
 
