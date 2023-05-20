@@ -83,8 +83,10 @@ class Game extends Phaser.Scene {
 		this.platforms.children.iterate(child => {
 			const platform = child
 			const scrollY = this.cameras.main.scrollY
+            const scrollX = this.cameras.main.scrollX
 			if (platform.y >= scrollY + 800)
 			{
+                platform.x = scrollX - Phaser.Math.Between(-900, -1700)
 				platform.y = scrollY - Phaser.Math.Between(50, 100)
 				platform.body.updateFromGameObject()
 				this.addStarAbove(platform)
@@ -129,7 +131,7 @@ class Game extends Phaser.Scene {
 
 	horizontalWrap(sprite)
 	{
-		const halfWidth = sprite.displayWidth * 0.5
+		const halfWidth = sprite.displayWidth * .5
 		const gameWidth = this.scale.width
 		if (sprite.x < -halfWidth)
 		{
@@ -162,6 +164,7 @@ class Game extends Phaser.Scene {
 		this.starsCollected++
 
 		this.starsCollectedText.text = `Stars: ${this.starsCollected}`
+
 	}
 
 	findBottomMostPlatform()
