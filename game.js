@@ -82,7 +82,7 @@ class Game extends Phaser.Scene {
 		this.platforms.children.iterate(child => {
 			const platform = child
 			const scrollY = this.cameras.main.scrollY
-			if (platform.y >= scrollY + 700)
+			if (platform.y >= scrollY + 800)
 			{
 				platform.y = scrollY - Phaser.Math.Between(50, 100)
 				platform.body.updateFromGameObject()
