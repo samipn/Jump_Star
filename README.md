@@ -6,7 +6,7 @@ The player uses the arrow keys to move as continuous inputs, and they automatica
 
 I added transition effects between screens, as well as a jumping animation.
 
-I also added a counter to count how many stars the player has collected, and a high score tracker
+I also added a counter to count how many stars the player has collected, and a highscore tracker
 that updates in real time and saves the player's highscore even after closing the game. 
 
 I created all assets by myself. For the player, I decided to have a space/star theme so the player themselves is a star. 
